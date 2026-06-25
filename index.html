@@ -6,311 +6,149 @@
   <title>MeFinder — Daily Planner</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f8;
-      color: #333;
-      min-height: 100vh;
-    }
-
-    header {
-      background: linear-gradient(135deg, #1F4E79, #2E75B6);
-      color: white;
-      padding: 24px 32px;
-      text-align: center;
-    }
-    header h1 { font-size: 2rem; letter-spacing: 1px; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; min-height: 100vh; }
+    header { background: linear-gradient(135deg, #1F4E79, #2E75B6); color: white; padding: 24px 32px; text-align: center; }
+    header h1 { font-size: 2rem; }
     header p { font-size: 0.95rem; opacity: 0.85; margin-top: 4px; }
-
     .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    }
-
-    .card h2 {
-      font-size: 1rem;
-      color: #1F4E79;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* MODE BUTTONS */
-    .mode-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .mode-btn {
-      padding: 14px;
-      border: 2px solid #dde3ec;
-      border-radius: 12px;
-      background: white;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #444;
-      font-weight: 500;
-    }
-    .mode-btn:hover { border-color: #2E75B6; color: #2E75B6; }
+    .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .card h2 { font-size: 1rem; color: #1F4E79; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card .subtitle { font-size: 0.85rem; color: #888; margin-bottom: 16px; }
+    .step { display: none; }
+    .step.active { display: block; }
+    .progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
+    .progress-dot { width: 10px; height: 10px; border-radius: 50%; background: #dde3ec; transition: all 0.3s; }
+    .progress-dot.active { background: #2E75B6; transform: scale(1.3); }
+    .progress-dot.done { background: #2E75B6; }
+    .mood-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .mood-btn { padding: 16px 8px; border: 2px solid #dde3ec; border-radius: 12px; background: white; font-size: 1.6rem; cursor: pointer; text-align: center; transition: all 0.2s; }
+    .mood-btn span { display: block; font-size: 0.75rem; color: #888; margin-top: 4px; }
+    .mood-btn.active { border-color: #2E75B6; background: #f0f6ff; }
+    .check-input { width: 100%; padding: 12px 16px; border: 2px solid #dde3ec; border-radius: 10px; font-size: 0.95rem; color: #333; font-family: 'Segoe UI', sans-serif; resize: none; min-height: 70px; }
+    .check-input:focus { outline: none; border-color: #2E75B6; }
+    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mode-btn { padding: 14px; border: 2px solid #dde3ec; border-radius: 12px; background: white; font-size: 0.95rem; cursor: pointer; color: #444; font-weight: 500; transition: all 0.2s; }
     .mode-btn.active { background: #2E75B6; color: white; border-color: #2E75B6; }
-
-    /* TIME */
-    select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #dde3ec;
-      border-radius: 10px;
-      font-size: 1rem;
-      color: #333;
-      background: white;
-      cursor: pointer;
-    }
-    select:focus { outline: none; border-color: #2E75B6; }
-
-    /* FOCUS PILLS */
+    select { width: 100%; padding: 12px 16px; border: 2px solid #dde3ec; border-radius: 10px; font-size: 1rem; color: #333; background: white; }
     .pills { display: flex; gap: 10px; flex-wrap: wrap; }
-    .pill {
-      padding: 10px 20px;
-      border: 2px solid #dde3ec;
-      border-radius: 30px;
-      background: white;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #444;
-    }
-    .pill:hover { border-color: #2E75B6; color: #2E75B6; }
+    .pill { padding: 10px 20px; border: 2px solid #dde3ec; border-radius: 30px; background: white; font-size: 0.9rem; cursor: pointer; color: #444; transition: all 0.2s; }
     .pill.active { background: #2E75B6; color: white; border-color: #2E75B6; }
-
-    /* GENERATE BUTTON */
-    .generate-btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #1F4E79, #2E75B6);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      letter-spacing: 0.5px;
-    }
-    .generate-btn:hover { opacity: 0.9; }
-    .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    /* LOADING */
-    .loading {
-      text-align: center;
-      padding: 32px;
-      color: #2E75B6;
-      font-size: 1rem;
-      display: none;
-    }
-    .spinner {
-      width: 36px; height: 36px;
-      border: 4px solid #dde3ec;
-      border-top-color: #2E75B6;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 12px;
-    }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .btn-primary { background: linear-gradient(135deg, #1F4E79, #2E75B6); color: white; }
+    .btn-outline { background: white; color: #2E75B6; border: 2px solid #2E75B6; margin-top: 10px; }
+    .loading { text-align: center; padding: 32px; color: #2E75B6; display: none; }
+    .spinner { width: 36px; height: 36px; border: 4px solid #dde3ec; border-top-color: #2E75B6; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* RESULTS */
     #results { display: none; }
-
-    /* CHECKLIST */
-    .task-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f4f8;
-    }
+    .checkin-summary { background: #f7f9fc; border-radius: 10px; padding: 14px 16px; font-size: 0.9rem; color: #555; border-left: 4px solid #2E75B6; line-height: 1.8; }
+    .task-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f4f8; }
     .task-item:last-child { border-bottom: none; }
-    .task-check {
-      width: 22px; height: 22px;
-      border: 2px solid #2E75B6;
-      border-radius: 6px;
-      cursor: pointer;
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
+    .task-check { width: 22px; height: 22px; border: 2px solid #2E75B6; border-radius: 6px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .task-check.checked { background: #2E75B6; }
     .task-check.checked::after { content: "✓"; color: white; font-size: 13px; font-weight: bold; }
     .task-text { flex: 1; font-size: 0.95rem; }
     .task-text.done { text-decoration: line-through; color: #aaa; }
-    .task-duration {
-      font-size: 0.8rem;
-      color: #888;
-      background: #f0f4f8;
-      padding: 3px 8px;
-      border-radius: 20px;
-    }
-
-    /* JOURNAL PROMPTS */
-    .prompt-card {
-      background: #f7f9fc;
-      border-left: 4px solid #2E75B6;
-      padding: 12px 16px;
-      border-radius: 0 10px 10px 0;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
-      color: #333;
-    }
-
-    /* WHAT I NOW */
-    .now-box {
-      background: linear-gradient(135deg, #e8f0f9, #d4e6f7);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #1F4E79;
-    }
-
-    /* GRATITUDE */
-    .gratitude-item {
-      padding: 10px 0;
-      border-bottom: 1px solid #f0f4f8;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .task-duration { font-size: 0.8rem; color: #888; background: #f0f4f8; padding: 3px 8px; border-radius: 20px; }
+    .prompt-card { background: #f7f9fc; border-left: 4px solid #2E75B6; padding: 12px 16px; border-radius: 0 10px 10px 0; margin-bottom: 10px; font-size: 0.95rem; }
+    .now-box { background: linear-gradient(135deg, #e8f0f9, #d4e6f7); border-radius: 12px; padding: 20px; text-align: center; font-size: 1.1rem; font-weight: 500; color: #1F4E79; }
+    .gratitude-item { padding: 10px 0; border-bottom: 1px solid #f0f4f8; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
     .gratitude-item:last-child { border-bottom: none; }
-    .gratitude-item::before { content: "🌟"; font-size: 1rem; }
-
-    /* NEXT STEP */
-    .next-box {
-      background: linear-gradient(135deg, #1F4E79, #2E75B6);
-      color: white;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.05rem;
-      font-weight: 500;
-    }
-
-    /* ERROR */
-    .error-box {
-      background: #fff0f0;
-      border: 1px solid #ffcccc;
-      color: #cc0000;
-      padding: 16px;
-      border-radius: 10px;
-      text-align: center;
-      display: none;
-    }
+    .gratitude-item::before { content: "🌟"; }
+    .next-box { background: linear-gradient(135deg, #1F4E79, #2E75B6); color: white; border-radius: 12px; padding: 20px; text-align: center; font-size: 1.05rem; font-weight: 500; }
+    .error-box { background: #fff0f0; border: 1px solid #ffcccc; color: #cc0000; padding: 16px; border-radius: 10px; text-align: center; margin-top: 16px; display: none; }
+    .q-label { font-size: 0.9rem; color: #555; margin-bottom: 8px; margin-top: 20px; font-weight: 500; }
   </style>
-</head>
-<body>
-
+</head><body>
 <header>
   <h1>🌅 MeFinder</h1>
-  <p>Your personalised daily routine planner</p>
+  <p>Take a moment — figure out your day</p>
 </header>
-
 <div class="container">
-
-  <!-- MODE SELECTOR -->
-  <div class="card">
-    <h2>Choose Your Mode</h2>
-    <div class="mode-grid">
-      <button class="mode-btn active" data-mode="self">🙋 Self</button>
-      <button class="mode-btn" data-mode="parents">👨‍👩‍👧 Parents</button>
-      <button class="mode-btn" data-mode="kids">🧒 Kids</button>
-      <button class="mode-btn" data-mode="family & friends">👥 Family & Friends</button>
-    </div>
+  <div class="progress">
+    <div class="progress-dot active" id="dot1"></div>
+    <div class="progress-dot" id="dot2"></div>
+    <div class="progress-dot" id="dot3"></div>
   </div>
 
-  <!-- TIME SELECTOR -->
-  <div class="card">
-    <h2>Available Time</h2>
-    <select id="timeSelect">
-      <option value="15">15 minutes</option>
-      <option value="30" selected>30 minutes</option>
-      <option value="45">45 minutes</option>
-      <option value="60">60 minutes</option>
-    </select>
-  </div>
-
-  <!-- FOCUS PILLS -->
-  <div class="card">
-    <h2>Focus Area</h2>
-    <div class="pills">
-      <button class="pill active" data-focus="Journaling">📓 Journaling</button>
-      <button class="pill" data-focus="Planning">📋 Planning</button>
-      <button class="pill" data-focus="Reflection">🪞 Reflection</button>
-    </div>
-  </div>
-
-  <!-- GENERATE BUTTON -->
-  <button class="generate-btn" id="generateBtn" onclick="generatePlan()">
-    ✨ Generate My Plan
-  </button>
-
-  <!-- LOADING -->
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <p>Creating your personalised plan...</p>
-  </div>
-
-  <!-- ERROR -->
-  <div class="error-box" id="errorBox"></div>
-
-  <!-- RESULTS -->
-  <div id="results">
-
-    <!-- TODAY'S PLAN -->
-    <div class="card" style="margin-top:20px;">
-      <h2>📋 Today's Plan</h2>
-      <div id="todayPlan"></div>
-    </div>
-
-    <!-- WHAT I NOW -->
+  <div class="step active" id="step1">
     <div class="card">
-      <h2>⚡ Do This Right Now</h2>
-      <div class="now-box" id="whatINow"></div>
+      <h2>🌿 Daily Check-In</h2>
+      <p class="subtitle">Take 2 minutes to check in with yourself before planning your day</p>
+      <p class="q-label">How are you feeling right now?</p>
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="tired">😴<span>Tired</span></button>
+        <button class="mood-btn" data-mood="stressed">😰<span>Stressed</span></button>
+        <button class="mood-btn active" data-mood="good">😊<span>Good</span></button>
+        <button class="mood-btn" data-mood="motivated">🔥<span>Motivated</span></button>
+      </div>
+      <p class="q-label">What is weighing on your mind today?</p>
+      <textarea class="check-input" id="weighing" placeholder="e.g. I have a deadline, feeling overwhelmed..."></textarea>
+      <p class="q-label">What would make today feel successful?</p>
+      <textarea class="check-input" id="success" placeholder="e.g. Finish one important task, spend time with family..."></textarea>
+      <p class="q-label">What is one thing you want to let go of?</p>
+      <textarea class="check-input" id="letgo" placeholder="e.g. Worrying about things I cannot control..."></textarea>
+      <button class="btn btn-primary" onclick="goToStep2()">Continue →</button>
     </div>
-
-    <!-- JOURNALING PROMPTS -->
-    <div class="card">
-      <h2>📓 Journaling Prompts</h2>
-      <div id="journalingPrompts"></div>
-    </div>
-
-    <!-- GRATITUDE -->
-    <div class="card">
-      <h2>🌟 Gratitude Moments</h2>
-      <div id="gratitude"></div>
-    </div>
-
-    <!-- NEXT STEP -->
-    <div class="card">
-      <h2>🚀 Tomorrow's Next Step</h2>
-      <div class="next-box" id="nextStep"></div>
-    </div>
-
   </div>
-</div>
 
-<script>
-  // SELECTIONS
-  let selectedMode = 'self';
-  let selectedFocus = 'Journaling';
+  <div class="step" id="step2">
+    <div class="card">
+      <h2>Choose Your Mode</h2>
+      <p class="subtitle">Who are you planning for today?</p>
+      <div class="mode-grid">
+        <button class="mode-btn active" data-mode="self">🙋 Self</button>
+        <button class="mode-btn" data-mode="parents">👨‍👩‍👧 Parents</button>
+        <button class="mode-btn" data-mode="kids">🧒 Kids</button>
+        <button class="mode-btn" data-mode="family & friends">👥 Family & Friends</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Available Time</h2>
+      <p class="subtitle">How much time do you have right now?</p>
+      <select id="timeSelect">
+        <option value="15">15 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="45">45 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+    </div>
+    <div class="card">
+      <h2>Focus Area</h2>
+      <p class="subtitle">What do you want to focus on today?</p>
+      <div class="pills">
+        <button class="pill active" data-focus="Journaling">📓 Journaling</button>
+        <button class="pill" data-focus="Planning">📋 Planning</button>
+        <button class="pill" data-focus="Reflection">🪞 Reflection</button>
+      </div>
+    </div>
+    <button class="btn btn-primary" id="generateBtn" onclick="generatePlan()">✨ Generate My Plan</button>
+    <button class="btn btn-outline" onclick="goToStep1()">← Back</button>
+  </div>
 
-  // MODE BUTTONS
+  <div class="step" id="step3">
+    <div class="loading" id="loading"><div class="spinner"></div><p>Creating your personalised plan...</p></div>
+    <div class="error-box" id="errorBox"></div>
+    <div id="results">
+      <div class="card"><h2>🌿 Your Check-In</h2><div class="checkin-summary" id="checkinSummary"></div></div>
+      <div class="card"><h2>📋 Today's Plan</h2><div id="todayPlan"></div></div>
+      <div class="card"><h2>⚡ Do This Right Now</h2><div class="now-box" id="whatINow"></div></div>
+      <div class="card"><h2>📓 Journaling Prompts</h2><div id="journalingPrompts"></div></div>
+      <div class="card"><h2>🌟 Gratitude Moments</h2><div id="gratitude"></div></div>
+      <div class="card"><h2>🚀 Tomorrow's Next Step</h2><div class="next-box" id="nextStep"></div></div>
+      <button class="btn btn-outline" onclick="startOver()">🔄 Start a New Plan</button>
+    </div>
+  </div>
+</div><script>
+  let selectedMode = 'self', selectedFocus = 'Journaling', selectedMood = 'good';
+
+  document.querySelectorAll('.mood-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedMood = btn.dataset.mood;
+    });
+  });
+
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -319,7 +157,6 @@
     });
   });
 
-  // FOCUS PILLS
   document.querySelectorAll('.pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -328,110 +165,109 @@
     });
   });
 
-  // GENERATE PLAN
+  function setDot(step) {
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot' + i);
+      dot.classList.remove('active', 'done');
+      if (i < step) dot.classList.add('done');
+      if (i === step) dot.classList.add('active');
+    }
+  }
+
+  function goToStep1() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step1').classList.add('active');
+    setDot(1); window.scrollTo(0, 0);
+  }
+
+  function goToStep2() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step2').classList.add('active');
+    setDot(2); window.scrollTo(0, 0);
+  }
+
+  function startOver() {
+    document.getElementById('results').style.display = 'none';
+    goToStep1();
+  }
+
   async function generatePlan() {
     const time = document.getElementById('timeSelect').value;
-    const btn = document.getElementById('generateBtn');
-    const loading = document.getElementById('loading');
-    const results = document.getElementById('results');
-    const errorBox = document.getElementById('errorBox');
+    const weighing = document.getElementById('weighing').value;
+    const success = document.getElementById('success').value;
+    const letgo = document.getElementById('letgo').value;
+    const extraContext = 'Mood: ' + selectedMood + '. Weighing on mind: ' + (weighing || 'nothing specific') + '. Today feels successful if: ' + (success || 'I complete my plan') + '. Letting go of: ' + (letgo || 'nothing specific');
 
-    btn.disabled = true;
-    loading.style.display = 'block';
-    results.style.display = 'none';
-    errorBox.style.display = 'none';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step3').classList.add('active');
+    setDot(3); window.scrollTo(0, 0);
+
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('errorBox').style.display = 'none';
 
     try {
       const response = await fetch('https://shaiju-8.app.n8n.cloud/webhook/meFinder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          routine_mode: selectedMode,
-          available_time: parseInt(time),
-          focus_area: selectedFocus
-        })
+        body: JSON.stringify({ routine_mode: selectedMode, available_time: parseInt(time), focus_area: selectedFocus, extra_context: extraContext })
       });
-
-      const raw = await response.text();
-      let data;
-
-      // Try to find JSON in the response
-      try {
-        data = JSON.parse(raw);
-      } catch {
-        const match = raw.match(/\{[\s\S]*\}/);
-        if (match) data = JSON.parse(match[0]);
-        else throw new Error('Could not parse response');
+      const rawText = await response.text();
+      let parsed;
+      try { parsed = JSON.parse(rawText); } catch { parsed = rawText; }
+      const data = extractJSON(parsed);
+      if (!data || !data.TodayPlan) {
+        document.getElementById('errorBox').style.display = 'block';
+        document.getElementById('errorBox').textContent = 'Could not read AI response. Please try again.';
+      } else {
+        document.getElementById('checkinSummary').innerHTML =
+          '<strong>Mood:</strong> ' + selectedMood + ' &nbsp;|&nbsp; <strong>Today wins if:</strong> ' + (success || 'plan completed') +
+          (weighing ? '<br><strong>On your mind:</strong> ' + weighing : '') +
+          (letgo ? '<br><strong>Letting go of:</strong> ' + letgo : '');
+        renderResults(data);
+        document.getElementById('results').style.display = 'block';
       }
-
-      // Handle nested Routine key if present
-      if (data.Routine) {
-        try { data = JSON.parse(data.Routine); } catch {}
-      }
-
-      renderResults(data);
-      results.style.display = 'block';
-
     } catch (err) {
-      errorBox.style.display = 'block';
-      errorBox.textContent = 'Something went wrong. Please try again. (' + err.message + ')';
+      document.getElementById('errorBox').style.display = 'block';
+      document.getElementById('errorBox').textContent = 'Connection error: ' + err.message;
     }
-
-    btn.disabled = false;
-    loading.style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
   }
 
-  // RENDER RESULTS
+  function extractJSON(raw) {
+    if (typeof raw === 'object' && raw !== null) {
+      if (raw.Routine) { try { return JSON.parse(raw.Routine); } catch {} try { return JSON.parse(raw.Routine.replace(/\\n/g, ' ')); } catch {} }
+      if (raw.result) { try { return JSON.parse(raw.result); } catch {} }
+      if (raw.data && raw.data.outputs) { const o = raw.data.outputs; if (o.result) { try { return JSON.parse(o.result); } catch {} } if (o.Routine) { try { return JSON.parse(o.Routine); } catch {} } }
+      if (raw.TodayPlan) return raw;
+    }
+    if (typeof raw === 'string') { try { return JSON.parse(raw); } catch {} const match = raw.match(/\{[\s\S]*\}/); if (match) { try { return JSON.parse(match[0]); } catch {} } }
+    return null;
+  }
+
   function renderResults(data) {
-    // TODAY'S PLAN
     const planDiv = document.getElementById('todayPlan');
     planDiv.innerHTML = '';
     (data.TodayPlan || []).forEach((item, i) => {
       const div = document.createElement('div');
       div.className = 'task-item';
-      div.innerHTML = `
-        <div class="task-check" id="check-${i}" onclick="toggleTask(${i})"></div>
-        <span class="task-text" id="task-${i}">${item.task}</span>
-        <span class="task-duration">${item.duration}</span>
-      `;
+      div.innerHTML = '<div class="task-check" id="check-' + i + '" onclick="toggleTask(' + i + ')"></div><span class="task-text" id="task-' + i + '">' + item.task + '</span><span class="task-duration">' + item.duration + '</span>';
       planDiv.appendChild(div);
     });
-
-    // WHAT I NOW
     document.getElementById('whatINow').textContent = data.WhatINow || '';
-
-    // JOURNALING PROMPTS
     const journalDiv = document.getElementById('journalingPrompts');
     journalDiv.innerHTML = '';
-    (data.JournalingPrompts || []).forEach(q => {
-      const div = document.createElement('div');
-      div.className = 'prompt-card';
-      div.textContent = q;
-      journalDiv.appendChild(div);
-    });
-
-    // GRATITUDE
+    (data.JournalingPrompts || []).forEach(q => { const div = document.createElement('div'); div.className = 'prompt-card'; div.textContent = q; journalDiv.appendChild(div); });
     const gratDiv = document.getElementById('gratitude');
     gratDiv.innerHTML = '';
-    (data.Gratitude || []).forEach(g => {
-      const div = document.createElement('div');
-      div.className = 'gratitude-item';
-      div.textContent = g;
-      gratDiv.appendChild(div);
-    });
-
-    // NEXT STEP
+    (data.Gratitude || []).forEach(g => { const div = document.createElement('div'); div.className = 'gratitude-item'; div.textContent = g; gratDiv.appendChild(div); });
     document.getElementById('nextStep').textContent = data.NextStep || '';
   }
 
-  // TICK TASK
   function toggleTask(i) {
-    const check = document.getElementById('check-' + i);
-    const text = document.getElementById('task-' + i);
-    check.classList.toggle('checked');
-    text.classList.toggle('done');
+    document.getElementById('check-' + i).classList.toggle('checked');
+    document.getElementById('task-' + i).classList.toggle('done');
   }
 </script>
-
 </body>
 </html>
