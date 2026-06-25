@@ -1,32 +1,66 @@
-# MeFinder 🌿
+# 🌅 MeFinder
+### "Find your day before it finds you."
 
-A web-based daily routine and journaling planner powered by AI.
+MeFinder is an AI-powered daily routine and journaling planner that helps you pause, reflect, and intentionally design your day — before the day designs you.
 
-## What it does
-MeFinder helps you start your day with intention. Select your routine mode, available time, and focus area — and get a personalised Today's Plan with:
-- ✅ A step-by-step daily checklist
-- 📓 Journaling prompts
-- 🙏 Gratitude moment
-- ➡️ One clear next step for tomorrow
+---
 
-## Who it's for
-- Self (personal growth & focus)
-- Parents (family & home balance)
-- Kids (fun & learning routines)
-- Family & Friends (connection & togetherness)
+## 🚀 Live Demo
+👉 [https://shaiju786.github.io/meFinder/](https://shaiju786.github.io/meFinder/)
 
-## Tech Stack
-- No-Code / Low-Code approach
-- AI: Claude API (Anthropic)
-- Automation: n8n
-- AI Workflow: Dify
-- Frontend: Web Dashboard
+---
 
-## How to Run
-1. Open the app in your browser
-2. Select your routine mode, time, and focus area
-3. Click **Generate Today's Plan**
-4. Complete your checklist and journal!
+## 💡 What It Does
 
-## Project Status
-🚧 Built as part of the AI Application Challenge 2026
+Most people wake up and react to whatever comes at them. MeFinder gives you 2-3 minutes of clarity to decide:
+- Who am I showing up for today?
+- How much energy do I have?
+- What actually matters today?
+
+---
+
+## 🔄 How It Works
+
+**Step 1 — Daily Check-In**
+Answer 4 simple questions about your mood, what is on your mind, what success looks like today, and what you want to let go of.
+
+**Step 2 — Set Your Mode**
+Choose who you are planning for — Self, Parents, Kids, or Family & Friends. Select your available time and focus area.
+
+**Step 3 — Get Your Plan**
+AI generates a personalised Today's Plan, journaling prompts, gratitude moments, and a next step for tomorrow.
+
+---
+
+## 🛠 Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| Dify | AI workflow — LLM node with structured JSON output |
+| n8n Cloud | Automation — connects Dify to the web app |
+| HTML / CSS / JS | Frontend web interface |
+| GitHub Pages | Free hosting and deployment |
+
+---
+
+## 📸 Screenshots
+*(Add screenshots here)*
+
+---
+
+## 🏆 AI Application Challenge 2026
+- **Participant:** Shaiju Shajahan
+- **Path:** No-Code / Low-Code
+- **Category:** Daily Productivity & Wellbeing
+
+---
+
+## 📁 Repository Structure
+
+```
+meFinder/
+├── index.html        # Complete web app
+├── README.md         # This file
+├── screenshots/      # App screenshots
+└── docs/             # Progress reports and workbook
+```
