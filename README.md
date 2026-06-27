@@ -44,7 +44,15 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ---
 
 ## 📸 Screenshots
-*(Add screenshots here)*
+
+### Step 1 — Daily Check-In
+![Check-In Screen](screenshots/Screenshot%202026-06-26%20at%202.45.24%20PM.png)
+
+### Step 2 — Mode & Time Selection
+![Mode Selection](screenshots/Screenshot%202026-06-26%20at%202.45.39%20PM.png)
+
+### Step 3 — AI Generated Plan
+![Plan Output](screenshots/Screenshot%202026-06-26%20at%202.46.06%20PM.png)
 
 ---
 
