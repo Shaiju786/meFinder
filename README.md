@@ -44,6 +44,8 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ---
 ## 📸 Screenshots
 
+## 📸 Screenshots
+
 ### Step 1 — Daily Check-In
 ![Check-In](screenshots/Check-in.png)
 
