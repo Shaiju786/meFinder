@@ -6,7 +6,8 @@ MeFinder is an AI-powered daily routine and journaling planner that helps you pa
 ---
 
 ## 🚀 Live Demo
-👉 [https://shaiju786.github.io/meFinder/](https://shaiju786.github.io/meFinder/)
+👉 ## 🎥 Demo Video
+👉 [Watch MeFinder Demo Video](https://drive.google.com/file/d/1Jpjj4hpLYWqr34p7_87LJ_epPR_grCwQ/view?usp=drive_link)
 
 ---
 
