@@ -42,19 +42,26 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 | GitHub Pages | Free hosting and deployment |
 
 ---
-
 ## 📸 Screenshots
 
 ### Step 1 — Daily Check-In
-![Check-In Screen](screenshots/Screenshot%202026-06-26%20at%202.45.24%20PM.png)
+![Check-In](screenshots/Check-in.png)
 
-### Step 2 — Mode & Time Selection
-![Mode Selection](screenshots/Screenshot%202026-06-26%20at%202.45.39%20PM.png)
+### Focus Selection
+![Focus Selection](screenshots/Focus Selection.png)
 
-### Step 3 — AI Generated Plan
-![Plan Output](screenshots/Screenshot%202026-06-26%20at%202.46.06%20PM.png)
+### Mode Selection
+![Mode Selection](screenshots/Mode Selection.png)
 
----
+### AI Generated Plan
+![Planner](screenshots/Planner.png)
+
+### Gratitude Moments
+![Gratitude](screenshots/Gratitude.png)
+
+### Tomorrow's Next Step
+![Next Step](screenshots/Next Step.png)
+
 
 ## 🏆 AI Application Challenge 2026
 - **Participant:** Shaiju Shajahan
