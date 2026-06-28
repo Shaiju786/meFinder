@@ -74,6 +74,19 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ---
 
 ## 📁 Repository Structure
+
+```
+meFinder/
+├── index.html        # Complete web app — UI, logic, API integration
+├── README.md         # Project documentation
+└── screenshots/      # App screenshots
+    ├── Check-in.png
+    ├── Mode Selection.png
+    ├── Focus Selection.png
+    ├── Planner.png
+    ├── Gratitude.png
+    └── Next Step.png
+```
 ---
 ## 🛡️ Safety Features
 
