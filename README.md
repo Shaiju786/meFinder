@@ -99,6 +99,23 @@ meFinder/
 - **HTTPS** — All connections secured via GitHub Pages
 - **No data storage** — User inputs are never stored or logged
   ---
+## 🔄 How It Works — Flow
+
+```
+User Opens App
+      ↓
+Daily Check-In (Mood + 3 Questions)
+      ↓
+Mode / Time / Focus Selection
+      ↓
+n8n Webhook Triggered
+      ↓
+Dify AI Workflow with Gemini LLM
+      ↓
+Structured JSON Response
+      ↓
+Personalised Daily Plan Displayed
+```
 
 ## 🚀 Future Improvements
 
