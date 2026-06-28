@@ -75,6 +75,16 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 
 ## 📁 Repository Structure
 ---
+## 🛡️ Safety Features
 
+- **Input sanitization** — User inputs are cleaned before being sent to the AI
+- **Prompt injection protection** — System prompt prevents malicious instruction overrides
+- **JSON response validation** — AI output is validated before displaying to user
+- **No medical advice** — AI is instructed never to provide medical, mental health or financial advice
+- **User-friendly error handling** — Clear messages shown if AI fails to respond
+- **Medical disclaimer** — Displayed in app footer and README
+- **HTTPS** — All connections secured via GitHub Pages
+- **No data storage** — User inputs are never stored or logged
+  
 ## ⚠️ Disclaimer
 MeFinder is a personal productivity tool built for the AI Application Challenge 2026. AI-generated plans are for guidance only and should not replace professional medical, mental health, or financial advice.
