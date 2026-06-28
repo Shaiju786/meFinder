@@ -98,6 +98,27 @@ meFinder/
 - **Medical disclaimer** — Displayed in app footer and README
 - **HTTPS** — All connections secured via GitHub Pages
 - **No data storage** — User inputs are never stored or logged
-  
+  ---
+
+## 🚀 Future Improvements
+
+- User login and personal history
+- Weekly summary and progress tracking
+- End of day reflection feature
+- Habit tracker integration
+- Mobile app version
+- Share your plan on WhatsApp
+- Voice input support
+- Celebration animation when all tasks completed
+
+---
+
+## 👨‍💻 Developer
+
+**Shaiju Shajahan**
+AI Application Challenge 2026 — No-Code / Low-Code Path
+GitHub: [Shaiju786](https://github.com/Shaiju786)
+
+---
 ## ⚠️ Disclaimer
 MeFinder is a personal productivity tool built for the AI Application Challenge 2026. AI-generated plans are for guidance only and should not replace professional medical, mental health, or financial advice.
