@@ -74,3 +74,7 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ---
 
 ## 📁 Repository Structure
+---
+
+## ⚠️ Disclaimer
+MeFinder is a personal productivity tool built for the AI Application Challenge 2026. AI-generated plans are for guidance only and should not replace professional medical, mental health, or financial advice.
