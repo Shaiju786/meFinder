@@ -98,7 +98,8 @@ meFinder/
 - **Medical disclaimer** — Displayed in app footer and README
 - **HTTPS** — All connections secured via GitHub Pages
 - **No data storage** — User inputs are never stored or logged
-  ---
+---
+
 ## 🔄 How It Works — Flow
 
 ```
