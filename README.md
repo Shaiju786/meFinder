@@ -1,18 +1,18 @@
 # 🌅 MeFinder
 ### "Find your day before it finds you."
-
 MeFinder is an AI-powered daily routine and journaling planner that helps you pause, reflect, and intentionally design your day — before the day designs you.
 
 ---
 
 ## 🚀 Live Demo
-👉 ## 🎥 Demo Video
+👉 [https://shaiju786.github.io/meFinder/](https://shaiju786.github.io/meFinder/)
+
+## 🎥 Demo Video
 👉 [Watch MeFinder Demo Video](https://drive.google.com/file/d/1Jpjj4hpLYWqr34p7_87LJ_epPR_grCwQ/view?usp=drive_link)
 
 ---
 
 ## 💡 What It Does
-
 Most people wake up and react to whatever comes at them. MeFinder gives you 2-3 minutes of clarity to decide:
 - Who am I showing up for today?
 - How much energy do I have?
@@ -43,6 +43,7 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 | GitHub Pages | Free hosting and deployment |
 
 ---
+
 ## 📸 Screenshots
 
 ### Step 1 — Daily Check-In
@@ -63,6 +64,7 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ### Step 6 — Tomorrow's Next Step
 ![Next Step](screenshots/Next%20Step.png)
 
+---
 
 ## 🏆 AI Application Challenge 2026
 - **Participant:** Shaiju Shajahan
@@ -72,11 +74,3 @@ AI generates a personalised Today's Plan, journaling prompts, gratitude moments,
 ---
 
 ## 📁 Repository Structure
-
-```
-meFinder/
-├── index.html        # Complete web app
-├── README.md         # This file
-├── screenshots/      # App screenshots
-└── docs/             # Progress reports and workbook
-```
